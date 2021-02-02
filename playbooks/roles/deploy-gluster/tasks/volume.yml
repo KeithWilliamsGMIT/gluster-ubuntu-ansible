@@ -1,0 +1,14 @@
+---
+- name: Print list of IPs and volumes
+  debug:
+    msg: "{{ groups['all'] | map('extract', hostvars, ['ansible_' + gluster_interface, 'ipv4', 'address']) | map('regex_replace', '$', ':/gluster/volume1') | list }}"
+
+- name: Create and start GlusterFS volume
+  gluster.gluster.gluster_volume:
+    state: present
+    name: staging-gfs
+    bricks: /gluster/volume1
+    replicas: 2
+    start_on_create: yes
+    cluster: "{{ groups['all'] | map('extract', hostvars, ['ansible_' + gluster_interface, 'ipv4', 'address']) | list }}"
+    force: yes

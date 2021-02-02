@@ -1,0 +1,9 @@
+---
+- name: Print list of all IPs
+  debug:
+    msg: "{{ groups['all'] | map('extract', hostvars, ['ansible_' + gluster_interface, 'ipv4', 'address']) | list }}"
+
+- name: Create a trusted storage pool
+  gluster.gluster.gluster_peer:
+    state: present
+    nodes: "{{ groups['all'] | map('extract', hostvars, ['ansible_' + gluster_interface, 'ipv4', 'address']) | list }}"

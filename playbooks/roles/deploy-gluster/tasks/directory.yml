@@ -1,0 +1,6 @@
+---
+- name: Create directory for GlusterFS volume
+  file:
+    path: /gluster/volume1
+    state: directory
+    recurse: yes

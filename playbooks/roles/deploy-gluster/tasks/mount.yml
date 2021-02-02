@@ -1,0 +1,9 @@
+---
+- name: Mount directory to store data
+  mount:
+    path: '{{ gluster_directory }}'
+    src: '{{ swarm_manager_ips }}:/staging-gfs'
+    fstype: glusterfs
+    state: mounted
+  vars:
+    swarm_manager_ips: "{{ groups['docker_swarm_manager'] | map('extract', hostvars, ['ansible_' + gluster_interface, 'ipv4', 'address']) | join(',') }}"

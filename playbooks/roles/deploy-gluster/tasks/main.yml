@@ -1,0 +1,12 @@
+---
+- import_tasks: install.yml
+
+- import_tasks: probe.yml
+  when: ansible_hostname == groups['docker_swarm_manager'][0]
+
+- import_tasks: directory.yml
+
+- import_tasks: volume.yml
+  when: ansible_hostname == groups['docker_swarm_manager'][0]
+
+- import_tasks: mount.yml
