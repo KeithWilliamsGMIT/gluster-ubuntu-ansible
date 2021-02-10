@@ -1,3 +1,6 @@
 ---
 gluster_directory: "/mnt"
 gluster_interface: "{{ ansible_default_ipv4['interface'] }}"
+gluster_replicas: 2
+gluster_volume_directory: "/gluster/volume1"
+gluster_volume_name: "staging-gfs"

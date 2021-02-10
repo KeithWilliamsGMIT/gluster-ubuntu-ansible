@@ -1,6 +1,6 @@
 ---
 - name: Create directory for GlusterFS volume
   file:
-    path: /gluster/volume1
+    path: '{{ gluster_volume_directory }}'
     state: directory
     recurse: yes

@@ -6,9 +6,9 @@
 - name: Create and start GlusterFS volume
   gluster.gluster.gluster_volume:
     state: present
-    name: staging-gfs
-    bricks: /gluster/volume1
-    replicas: 2
+    name: '{{ gluster_volume_name }}'
+    bricks: '{{ gluster_volume_directory }}'
+    replicas: '{{ gluster_replicas }}'
     start_on_create: yes
     cluster: "{{ groups['all'] | map('extract', hostvars, ['ansible_' + gluster_interface, 'ipv4', 'address']) | list }}"
     force: yes
